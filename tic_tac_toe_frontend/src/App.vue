@@ -1,85 +1,105 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import ScoreBoard from './components/ScoreBoard.vue'
+import ModeSelector from './components/ModeSelector.vue'
+import GameBoard from './components/GameBoard.vue'
+import TicControls from '@/components/TicControls.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="app-shell">
+    <main class="container">
+      <header class="header">
+        <h1 class="title" aria-label="Tic Tac Toe Title">Tic Tac Toe</h1>
+        <p class="subtitle">Ocean Professional Edition</p>
+      </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <section class="panel scoreboard">
+        <ScoreBoard />
+      </section>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <section class="panel selector" aria-label="Game mode selection">
+        <ModeSelector />
+      </section>
 
-  <RouterView />
+      <section class="panel board" aria-label="Game Board">
+        <GameBoard />
+      </section>
+
+      <section class="panel controls" aria-label="Game controls">
+        <TicControls />
+      </section>
+
+      <footer class="footer">
+        <small>Built with Vue 3 + Vite</small>
+      </footer>
+    </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.app-shell {
+  min-height: 100vh;
+  /* Subtle gradient background: blue-500/10 to gray-50 */
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), #f9fafb);
+  display: grid;
+  place-items: center;
+  color: #111827;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.container {
   width: 100%;
-  font-size: 12px;
+  max-width: 980px;
+  padding: 24px;
+}
+.header {
   text-align: center;
-  margin-top: 2rem;
+  margin-bottom: 16px;
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.title {
+  color: #111827;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.subtitle {
+  color: #4b5563;
+  margin-top: 4px;
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.panel {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+  padding: 16px;
+  margin: 10px 0;
+  transition: box-shadow 220ms ease, transform 220ms ease;
 }
-
-nav a:first-of-type {
-  border: 0;
+.panel:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.07), 0 10px 10px rgba(0,0,0,0.04);
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.scoreboard {
+  padding: 12px 16px;
+}
+.selector {
+  padding: 12px 16px;
+}
+.board {
+  padding: 18px;
+}
+.controls {
+  padding: 12px 16px;
+  display: grid;
+  gap: 12px;
+}
+.footer {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .container {
+    padding: 32px;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  .title {
+    font-size: 40px;
   }
 }
 </style>
